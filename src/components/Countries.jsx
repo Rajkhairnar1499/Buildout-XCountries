@@ -6,7 +6,6 @@ const CountryCard = () => {
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,21 +26,10 @@ const CountryCard = () => {
 
   if (error) return <div className="error">Error: {error.message}</div>;
 
-  const filteringCountries = countries.filter((country) =>
-    country.name.common.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
     <div className="countries">
-      <input
-        type="text"
-        value={search}
-        placeholder="Search for country..."
-        onChange={(e) => setSearch(e.target.value)}
-      />
-
       <div className="country-grid">
-        {filteringCountries.map((country) => (
+        {countries.map((country) => (
           <>
             <div  className="country-card">
               <img src={country.flags.svg} alt={country.flags.alt} />
