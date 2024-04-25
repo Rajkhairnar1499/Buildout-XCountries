@@ -14,6 +14,7 @@ const CountryCard = () => {
         const res = await axios.get(`https://restcountries.com/v3.1/all`);
         setCountries(res.data);
       } catch (error) {
+        console.log("Error fetching data", error);
         setError(error);
       } finally {
         setIsLoading(false);
@@ -22,9 +23,9 @@ const CountryCard = () => {
     fetchData();
   }, []);
 
-  if (isLoading) return <div> Loading Countries...</div>;
+  if (isLoading) return <div className="error"> Loading Countries...</div>;
 
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div className="error">Error: {error.message}</div>;
 
   const filteringCountries = countries.filter((country) =>
     country.name.common.toLowerCase().includes(search.toLowerCase())
@@ -42,7 +43,7 @@ const CountryCard = () => {
       <div className="country-grid">
         {filteringCountries.map((country) => (
           <>
-            <div key={country.cca2} className="country-card">
+            <div  className="country-card">
               <img src={country.flags.svg} alt={country.flags.alt} />
               <p>{country.name.common}</p>
             </div>

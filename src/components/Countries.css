@@ -3,6 +3,11 @@
     padding: 20px;
 }
 
+.error {
+    text-align: center;
+
+}
+
 input {
     padding: 10px;
     font-size: 16px;
